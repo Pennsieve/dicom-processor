@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  dicom_processor:
+    build:
+      context: .
+      dockerfile: dicom_processor/Dockerfile
+    container_name: dicom-processor
+    command: ["/bin/bash"]
+    env_file:
+      - dicom_processor/test.env
+    image: pennsieve/dicom-processor:${IMAGE_TAG}
+    volumes:
+      - ./data/dicom:/docker_scratch/
+      - ./dicom_processor/tests/resources:/test-resources/
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}

@@ -1,0 +1,10 @@
+version: '3.5'
+
+services:
+  dicom_processor:
+    build:
+      context: .
+      target: prod
+      dockerfile: dicom_processor/Dockerfile
+    container_name: dicom-processor
+    image: pennsieve/dicom-processor:${IMAGE_TAG}
